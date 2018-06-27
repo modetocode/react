@@ -4,6 +4,7 @@ import Paragraph from './Paragraph';
 import logo from './logo.svg';
 import './App.css';
 import Calculator from './Calculator';
+import ToDo from './ToDo';
 
 class App extends Component {
   render() {
@@ -16,13 +17,13 @@ class App extends Component {
     ]
     return (
       <div className="App">
-        <header className="App-header">
+        {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        </p> */}
         {/* <HelloWorld fullName="Cruel"/>
         <HelloWorld fullName="Darkness my old friend"/>
         <HelloWorld fullName={fn}/>
@@ -31,7 +32,8 @@ class App extends Component {
         }
         <Paragraph someContent="Hi" someNumbers="123" />
         <Paragraph someContent="Hi"/> */}
-        <Calculator/>
+        {/* <Calculator/> */}
+        <ToDo/>
         {/* {par.map((n, i) => <Paragraph someContent={n.content} someNumbers={n.numbers} key={i} />)} */}
       </div>
     );

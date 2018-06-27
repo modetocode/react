@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import CForm from './CForm';
+import CValue from './CValue';
 
 class Calculator extends Component {
     constructor() {
@@ -10,6 +12,7 @@ class Calculator extends Component {
         }
 
         this.changeNumberHandler = this.changeNumberHandler.bind(this);
+        this.sumTwo = this.sumTwo.bind(this);
     }
 
     sumTwo() {
@@ -34,11 +37,9 @@ class Calculator extends Component {
     render() {
         return (
             <div>
-                <input type="number" name="first" value={this.state.first} onChange={this.changeNumberHandler} />
-                <input type="number" name="second" value={this.state.second} onChange={this.changeNumberHandler} />
-                <input type="button" value="+" onClick={this.sumTwo.bind(this)} />
-                <input type="number" value={this.state.sum} />
-                Calculator </div>
+                <CForm valueA={this.state.first} valueB={this.state.second} valueHandler={this.changeNumberHandler} />
+                <CValue result={this.state.sum} clickHandler={this.sumTwo} />
+            </div>
         )
     };
 
