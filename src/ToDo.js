@@ -11,6 +11,7 @@ class ToDo extends Component {
                 { content: "todo 4", id: "4" },
             ],
             lastContent: "",
+            nextId: 5
         }
 
         this.addToList = this.addToList.bind(this);
@@ -18,19 +19,32 @@ class ToDo extends Component {
         this.changeLastToDoHandler = this.changeLastToDoHandler.bind(this);
     }
 
-    
+
     addToList() {
         let todo = {};
         todo["content"] = this.state.lastContent;
-        todo["id"] = this.state.todos.length + 1;
+        todo["id"] = parseInt(this.state.nextId) + 1;
+        console.log(this.state.nextId);
         let todos = this.state.todos;
-        this.state.todos.push(todo);
+        let state = this.state;
+        todos.push(todo);
+        state["todos"] = todos;
+        state["nextId"] = this.state.nextId + 1;
         // console.log(todos);
-        this.setState(todos);
+        this.setState(state);
     }
 
     removeFromList(e) {
-        console.log(e.target.name);
+        let newTodos = [];
+        for (var i = 0; i < this.state.todos.length; i++) {
+            if (this.state.todos[i].id != e.target.name) {
+                newTodos.push(this.state.todos[i]);
+            }
+        }
+
+        let state = {};
+        state["todos"] = newTodos;
+        this.setState(state);
     }
     changeLastToDoHandler(e) {
         let state = {};
@@ -42,7 +56,7 @@ class ToDo extends Component {
         return (
             <div>
                 <ToDoForm changeLastToDoHandler={this.changeLastToDoHandler} addToList={this.addToList} />
-                <ToDoList todos={this.state.todos}  removeFromList={this.removeFromList} />
+                <ToDoList todos={this.state.todos} removeFromList={this.removeFromList} />
             </div>
         );
     }
@@ -76,7 +90,7 @@ class ToDoList extends Component {
                 {this.props.todos.map((n) =>
                     <ul key={n.id}>
                         {n.content}
-                        <input type="button" value="Remove" name={n.id} onClick={this.props.removeFromList}/>
+                        <input type="button" value="Remove" name={n.id} onClick={this.props.removeFromList} />
                     </ul>
                 )}
             </div>
