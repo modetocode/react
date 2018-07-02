@@ -26,7 +26,7 @@ class ToDo extends Component {
         todo["id"] = parseInt(this.state.nextId) + 1;
         console.log(this.state.nextId);
         let todos = this.state.todos;
-        let state = this.state;
+        let state = {};
         todos.push(todo);
         state["todos"] = todos;
         state["nextId"] = this.state.nextId + 1;
@@ -35,12 +35,13 @@ class ToDo extends Component {
     }
 
     removeFromList(e) {
-        let newTodos = [];
-        for (var i = 0; i < this.state.todos.length; i++) {
-            if (this.state.todos[i].id != e.target.name) {
-                newTodos.push(this.state.todos[i]);
-            }
-        }
+        let newTodos = this.state.todos.filter(x => x.id != e.target.name);
+        // let newTodos = [];
+        // for (var i = 0; i < this.state.todos.length; i++) {
+        //     if (this.state.todos[i].id != e.target.name) {
+        //         newTodos.push(this.state.todos[i]);
+        //     }
+        // }
 
         let state = {};
         state["todos"] = newTodos;
@@ -89,8 +90,10 @@ class ToDoList extends Component {
             <div>
                 {this.props.todos.map((n) =>
                     <ul key={n.id}>
+                        <li>
                         {n.content}
                         <input type="button" value="Remove" name={n.id} onClick={this.props.removeFromList} />
+                        </li>
                     </ul>
                 )}
             </div>
