@@ -1,7 +1,9 @@
 import { INSERT_POST, REMOVE_POST } from "../constants/actions"
+import { combineReducers } from 'redux';
+import { postHasErrorReducer, postLoadingReducer, posts } from './posts'
 
 const initialState = {
-    posts: [ {
+    posts: [{
         id: 123,
         title: "Some title...",
         body: "lorem ipsum dolor sit amet..."
@@ -15,18 +17,23 @@ const initialState = {
     prezime: ""
 }
 
-const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case INSERT_POST:
-            return {...state, posts: [...state.posts, action.payload]};
-            break;
-        case REMOVE_POST:
-            return {...state, posts: [state.posts.filter(x => x.id != action.payload)]};
-            break;
-        default:
-            return state;
-    }
-    return state;
-}
+// const rootReducer = (state = initialState, action) => {
+//     switch (action.type) {
+//         case INSERT_POST:
+//             return {...state, posts: [...state.posts, action.payload]};
+//             break;
+//         case REMOVE_POST:
+//             return {...state, posts: [state.posts.filter(x => x.id != action.payload)]};
+//             break;
+//         default:
+//             return state;
+//     }
+//     return state;
+// }
 
+const rootReducer = combineReducers({
+    postHasErrorReducer, 
+    postLoadingReducer, 
+    posts
+});
 export default rootReducer;

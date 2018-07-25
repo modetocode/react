@@ -1,21 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { fetchPosts } from "./actions/posts";
 
 const mapStateToProps = state => {
-    return { posts: state.posts };
+    // console.log("Stejto" + JSON.stringify(state));
+    return {
+        posts: state.posts
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchPosts: () => dispatch(fetchPosts()),
+    }
 }
 
 class PostsCom extends Component {
+    componentDidMount() {
+        this.props.fetchPosts();
+        // this.props.dispatch(fetchPosts());
+    }
+
     constructor(props) {
         super(props)
     }
 
     render() {
+        const { posts } = this.props;
+        // console.log("Render");
+        // console.log(posts);
         return (
             <ul>
-                {this.props.posts.map((n) =>
-                    <SinglePost title={n.title} body={n.body} />
-                )};
+                {
+
+                    this.props.posts.map((n) =>
+                        <SinglePost title={n.title} body={n.body} />
+                    )};
             </ul>
         );
     }
@@ -36,5 +56,5 @@ class SinglePost extends Component {
     }
 }
 
-const Posts = connect(mapStateToProps)(PostsCom);
+const Posts = connect(mapStateToProps, mapDispatchToProps)(PostsCom);
 export default Posts;

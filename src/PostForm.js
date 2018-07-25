@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { insertPost } from './actions/index';
+import { insertPost, deletePost } from './actions/index';
 import { connect } from "react-redux";
 
 const mapDispatchToProps = dispatch => {
     return {
-        addPost: data => dispatch(insertPost(data))
+        addPost: data => dispatch(insertPost(data)),
+        deletePost: id => dispatch(deletePost(id)) 
     };
 };
 
