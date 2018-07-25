@@ -39,7 +39,7 @@ class PostFormCom extends Component {
                 <button onClick={this.savePost}> SAVE </button>
             </div>
         )
-    }
+    }   
 }
 
 const PostForm = connect(null, mapDispatchToProps)(PostFormCom);
