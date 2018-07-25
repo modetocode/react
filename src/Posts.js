@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { fetchPosts } from "./actions/posts";
+import simpleHOC from './hoc/simpleHOC';
 
 const mapStateToProps = state => {
     // console.log("Stejto" + JSON.stringify(state));
@@ -41,7 +42,7 @@ class PostsCom extends Component {
     }
 }
 
-class SinglePost extends Component {
+class SinglePostCom extends Component {
     constructor(props) {
         super(props)
     }
@@ -56,5 +57,6 @@ class SinglePost extends Component {
     }
 }
 
+const SinglePost = simpleHOC(SinglePostCom);
 const Posts = connect(mapStateToProps, mapDispatchToProps)(PostsCom);
 export default Posts;
